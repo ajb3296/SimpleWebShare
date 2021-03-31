@@ -1,4 +1,5 @@
 # SimpleWebShare
+[![CodeFactor](https://www.codefactor.io/repository/github/newpremium/simplewebshare/badge)](https://www.codefactor.io/repository/github/newpremium/simplewebshare)
 
 간단한 설정으로 순식간에 서버를 여실 수 있어요!
 
