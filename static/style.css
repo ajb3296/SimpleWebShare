@@ -17,14 +17,14 @@
 }
 #footer {
   clear: both;
-  text-align: center;	
+  text-align: center;
   padding: 10px;
   margin-left: 10%;
   margin-right: 10%;
   height: 100px;
 }
 .footer p {
-  text-align: center;	
+  text-align: center;
   padding: 10px;
   font-size:17px;
   color: #000;
@@ -98,7 +98,6 @@ button:hover {
 }
 
 #box1 { border-radius: 10px; border:2px solid; position: relative; overflow: hidden; display: table; float: left; width: 100%; padding: 10px; text-align:left; margin-bottom: 10px;}
-#box2 { border-radius: 30px; border:3px solid; position: relative; overflow: hidden; display: table; height: 330px; float: left; width: 32%; padding: 20px; text-align:center;}
 .content {
   display: table-cell;
   vertical-align: middle;
@@ -113,7 +112,7 @@ body {
 }
 
 @keyframes slidein
-{ 
+{
   from {
     margin-left: 100%; width: 300%
   }
@@ -121,9 +120,4 @@ body {
   {
     margin-left: 0%; width: 100%;
   }
-}
-/* 모바일 지원 */
-@media screen and (max-width: 1100px) {
-  #box1 { border-radius: 10px; border:2px solid; position: relative; overflow: hidden; display: table; float: left; width: 100%; padding: 10px;}
-  #box2 { border-radius: 30px; border:3px solid; position: relative; overflow: hidden; display: table; height: 300px; width: 100%; padding: 20px; text-align:center;}
 }
