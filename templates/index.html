@@ -1,0 +1,142 @@
+<html>
+	<head>
+		<title>{{title}}</title>
+
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+        <!-- 기본 메타 태그 -->
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="SimpleWebShare">
+		<meta name="author" content="">
+        <!-- IE 미지원 -->
+
+		<script>
+			var agent = navigator.userAgent.toLowerCase();
+			if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) {
+				window.location.href="https://newpremium.github.io/IE_filtering/";
+			}
+		</script>
+
+
+		<!-- CDN CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+		<link href="https://startbootstrap.github.io/startbootstrap-scrolling-nav/css/scrolling-nav.css" rel="stylesheet">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/css/font-awesome.min.css') }}" type="text/css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+
+		<!-- CDN SCRIPT -->
+		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		<script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+
+    </head>
+    <!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="position: sticky;" id="mainNav">
+		<div class="container-fluid">
+			<a class="navbar-brand js-scroll-trigger logo" href="http://{{title_url}}:{{port}}">{{title}}</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="http://{{title_url}}:{{port}}">Main
+							<!--<span class="sr-only">(current)</span>-->
+						</a>
+						<li class="nav-item">
+							<a class="nav-link js-scroll-trigger" href="https://github.com/NewPremium/SimpleWebShare">Github</a>
+						</li>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<body>
+		<p style="font-size: 3.5rem; margin-top: 100px; text-align:center; margin-bottom: 100px;">{{title}}</p>
+		<div class="container">
+			<div id="box1" style="background-color: #a5a5a56b;">
+				<a>Path : {{vpath}}</a>
+			</div>
+			<br>
+			{% if back_path != vpath %}
+			<button type="button" onclick="location.href='{{url}}?path={{back_path}}'" style="width: 100%;">..</button>
+			{% endif %}
+			{% for n in folderlist %}
+			<div><button type="button" style="width: 100%;" onclick="location.href='{{url}}?path={{vpath}}{{n}}/'"><i class="fa fa-folder" aria-hidden="true"></i> {{n}} <a id="files_list_right">| {% print(os.listdir(path+n)|length) %}개의 항목</a></button>
+			{% endfor %}
+
+			{% for file in files %}
+				<button type="button" onclick="location.href='{{url}}download/?path={{vpath}}{{file}}'" style="width: 100%;">
+				<!-- 아이콘 설정 -->
+				<!-- Archive -->
+				{% if file.lower().endswith(".ais") or file.lower().endswith(".arj") or file.lower().endswith(".cab") or file.lower().endswith(".gz") or file.lower().endswith(".hgx") or file.lower().endswith(".jas") or file.lower().endswith(".lzh") or file.lower().endswith(".pak") or file.lower().endswith(".psz") or file.lower().endswith(".rar") or file.lower().endswith(".sea") or file.lower().endswith(".tgz") or file.lower().endswith(".zip") or file.lower().endswith(".zool") or file.lower().endswith(".7z") %}
+					<i class="fa fa-file-archive-o" aria-hidden="true"></i>
+				<!-- PDF -->
+				{% elif file.lower().endswith(".pdf") %}
+					<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+				<!-- Code -->
+				{% elif file.lower().endswith(".c") or file.lower().endswith(".cc") or file.lower().endswith(".cpp") or file.lower().endswith(".h") or file.lower().endswith(".m") or file.lower().endswith(".mm") or file.lower().endswith(".pl") or file.lower().endswith(".o") or file.lower().endswith(".java") or file.lower().endswith(".class") or file.lower().endswith(".jsp") or file.lower().endswith(".php") or file.lower().endswith(".as") or file.lower().endswith(".js") or file.lower().endswith(".asp") or file.lower().endswith(".cs") or file.lower().endswith(".py") or file.lower().endswith(".xml") or file.lower().endswith(".html") or file.lower().endswith(".htm") or file.lower().endswith(".json") or file.lower().endswith(".css") %}
+					<i class="fa fa-file-code-o" aria-hidden="true"></i>
+				<!-- CMD -->
+				{% elif file.lower().endswith(".bat") or file.lower().endswith(".cmd") or file.lower().endswith(".sh") %}
+					<i class="fa fa-terminal" aria-hidden="true"></i>
+				<!-- Apk -->
+				{% elif file.lower().endswith(".apk") %}
+					<i class="fa fa-android" aria-hidden="true"></i>
+				<!-- Img -->
+				{% elif file.lower().endswith(".ai") or file.lower().endswith(".bmp") or file.lower().endswith(".gif") or file.lower().endswith(".jpg") or file.lower().endswith(".jpge") or file.lower().endswith(".jpe") or file.lower().endswith(".jfif") or file.lower().endswith(".jp2") or file.lower().endswith(".j2c") or file.lower().endswith(".pcx") or file.lower().endswith(".png") or file.lower().endswith(".psd") or file.lower().endswith(".tga") or file.lower().endswith(".taga") or file.lower().endswith(".tif") or file.lower().endswith(".svg") %}
+					<i class="fa fa-file-image-o" aria-hidden="true"></i>
+				<!-- Txt -->
+				{% elif file.lower().endswith(".txt") or file.lower().endswith(".log") or file.lower().endswith(".md") or file.lower().endswith(".yml") %}
+					<i class="fa fa-file-text-o" aria-hidden="true"></i>
+				<!-- Video -->
+				{% elif file.lower().endswith(".webm") or file.lower().endswith(".mkv") or file.lower().endswith(".flv") or file.lower().endswith(".vob") or file.lower().endswith(".ogv") or file.lower().endswith(".ogg") or file.lower().endswith(".drc") or file.lower().endswith(".gifv") or file.lower().endswith(".mng") or file.lower().endswith(".avi") or file.lower().endswith(".mts") or file.lower().endswith(".m2ts") or file.lower().endswith(".ts") or file.lower().endswith(".mov") or file.lower().endswith(".qt") or file.lower().endswith(".wmv") or file.lower().endswith(".yuv") or file.lower().endswith(".rm") or file.lower().endswith(".rmvb") or file.lower().endswith(".asf") or file.lower().endswith(".amv") or file.lower().endswith(".mp4") or file.lower().endswith(".m4p") or file.lower().endswith(".m4v") or file.lower().endswith(".mpg") or file.lower().endswith(".mp2") or file.lower().endswith(".mpeg") or file.lower().endswith(".mpe") or file.lower().endswith(".mpv") or file.lower().endswith(".mpg") or file.lower().endswith(".mpeg") or file.lower().endswith(".m2v") or file.lower().endswith(".m4v") or file.lower().endswith(".svi") or file.lower().endswith(".3gp") or file.lower().endswith(".3g2") or file.lower().endswith(".mxf") or file.lower().endswith(".roq") or file.lower().endswith(".nsv") or file.lower().endswith(".flv") or file.lower().endswith(".f4v") or file.lower().endswith(".f4p") or file.lower().endswith(".f4a") or file.lower().endswith(".f4b") %}
+					<i class="fa fa-file-video-o" aria-hidden="true"></i>
+				<!-- Audio -->
+				{% elif file.lower().endswith(".3gp") or file.lower().endswith(".aiff") or file.lower().endswith(".aac") or file.lower().endswith(".alac") or file.lower().endswith(".amr") or file.lower().endswith(".atrac") or file.lower().endswith(".wav") or file.lower().endswith(".au") or file.lower().endswith(".awb") or file.lower().endswith(".dvf") or file.lower().endswith(".flac") or file.lower().endswith(".mmf") or file.lower().endswith(".mp3") or file.lower().endswith(".mpc") or file.lower().endswith(".msv") or file.lower().endswith(".ogg") or file.lower().endswith(".opus") or file.lower().endswith(".ra") or file.lower().endswith(".ram") or file.lower().endswith(".tta") or file.lower().endswith(".vox") or file.lower().endswith(".wma") %}
+					<i class="fa fa-file-audio-o" aria-hidden="true"></i>
+				<!-- DB -->
+				{% elif file.lower().endswith(".db") %}
+					<i class="fa fa-database" aria-hidden="true"></i>
+				<!-- Font -->
+				{% elif file.lower().endswith(".bdf") or file.lower().endswith(".chr") or file.lower().endswith(".dfont") or file.lower().endswith(".eot") or file.lower().endswith(".etx") or file.lower().endswith(".fnt") or file.lower().endswith(".fon") or file.lower().endswith(".fot") or file.lower().endswith(".gdr") or file.lower().endswith(".gf") or file.lower().endswith(".gxf") or file.lower().endswith(".mcf") or file.lower().endswith(".mf") or file.lower().endswith(".oft") or file.lower().endswith(".pf?") or file.lower().endswith(".pfa") or file.lower().endswith(".pfb") or file.lower().endswith(".pfm") or file.lower().endswith(".pfr") or file.lower().endswith(".sfd") or file.lower().endswith(".suit") or file.lower().endswith(".tfm") or file.lower().endswith(".ttc") or file.lower().endswith(".ttf") or file.lower().endswith(".vlw") or file.lower().endswith(".woff") or file.lower().endswith(".woff2") or file.lower().endswith(".xfn") or file.lower().endswith(".xft") or file.lower().endswith(".otf") %}
+					<i class="fa fa-font" aria-hidden="true"></i>
+				<!-- PPT -->
+				{% elif file.lower().endswith(".ppt") or file.lower().endswith(".pptx") or file.lower().endswith(".hpt") or file.lower().endswith(".show") or file.lower().endswith(".key") %}
+					<i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
+				<!-- Excel -->
+				{% elif file.lower().endswith(".xlsx") or file.lower().endswith(".xlsm") or file.lower().endswith(".xlsb") or file.lower().endswith(".xltx") or file.lower().endswith(".xltxm") or file.lower().endswith(".xls") or file.lower().endswith(".xlam") or file.lower().endswith(".xltm") or file.lower().endswith(".nxl") or file.lower().endswith(".cell") or file.lower().endswith(".hst") or file.lower().endswith(".numbers") %}
+					<i class="fa fa-file-excel-o" aria-hidden="true"></i>
+				<!-- Word -->
+				{% elif file.lower().endswith(".doc") or file.lower().endswith(".docx") or file.lower().endswith(".docm") or file.lower().endswith(".hwp") or file.lower().endswith(".gul") or file.lower().endswith(".pages") %}
+					<i class="fa fa-file-word-o" aria-hidden="true"></i>
+				{% else %}
+					<i class="fa fa-file-o" aria-hidden="true"></i>
+				{% endif %}
+				{{file}} <a id="files_list_right">|
+				{% if "%.2f TB" %(os.path.getsize(path+file)/(1024.0 * 1024.0 * 1024.0 * 1024.0)) != "0.00 TB" %}
+					{% print(" %.2f TB" %(os.path.getsize(path+"/"+file)/(1024.0 * 1024.0 * 1024.0 * 1024.0))) %}
+				{% elif "%.2f GB" %(os.path.getsize(path+file)/(1024.0 * 1024.0 * 1024.0)) != "0.00 GB" %}
+					{% print(" %.2f GB" %(os.path.getsize(path+"/"+file)/(1024.0 * 1024.0 * 1024.0))) %}
+				{% elif "%.2f MB" %(os.path.getsize(path+file)/(1024.0 * 1024.0)) != "0.00 MB" %}
+					{% print(" %.2f MB" %(os.path.getsize(path+file)/(1024.0 * 1024.0))) %}
+				{% elif "%.2f KB"%(os.path.getsize(path+file)/1024) %}
+					{% print(" %.2f KB"%(os.path.getsize(path+file)/1024)) %}
+				{% else %}
+					{% print(" %.2f Byte" %os.path.getsize(path+file)) %}
+				{% endif %}
+				</a></button>
+			{% endfor %}
+
+		</div>
+		<div class="container">
+			<footer id ="footer">
+				<hr style="border: 0.5px solid rgba(255,255,255,.2)">
+				<p class="m-0">Copyright © 2021 <a id="footera" href='https://github.com/NewPremium/SimpleWebShare' target='_blank'>SimpleWebShare</a>. All rights reserved.</p>
+			</footer>
+		</div>
+	</body>
+</html>
