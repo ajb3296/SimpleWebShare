@@ -63,7 +63,8 @@ def index():
                             folderlist = folders, # 폴더 리스트
                             files = files, # 파일 리스트
                             title = title, # 타이틀
-                            os = os # os 모듈
+                            os = os, # os 모듈
+                            version = version # 버전
                             )
 
 @app.route("/download/")
@@ -108,7 +109,8 @@ def download():
 # 404 ERROR 처리
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template("404.html", url = request.host, port = port, title = title, error = error), 404
+    return render_template("404.html", url = request.host, port = port, title = title, error = error, version = version), 404
 
 if __name__ == '__main__':
+    version = "V 1.0.0"
     app.run(debug=True, host='0.0.0.0', port = str(port), threaded=True)
