@@ -112,5 +112,5 @@ def page_not_found(error):
     return render_template("404.html", url = request.host, port = port, title = title, error = error, version = version), 404
 
 if __name__ == '__main__':
-    version = "V 1.0.0"
+    version = "V-1.0.0"
     app.run(debug=True, host='0.0.0.0', port = str(port), threaded=True)
