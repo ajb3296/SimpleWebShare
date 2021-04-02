@@ -3,6 +3,10 @@
 
 간단한 설정으로 순식간에 서버를 여실 수 있어요!
 
+### 참고
+
+[Font Awesome](https://fontawesome.com/v4.7.0/license/)
+
 ### 심플 웹쉐어 서버 여는법
 1. `config.py` 파일에 아래와 같이 작성하여 저장한다.
 
@@ -26,3 +30,7 @@ port = "5000"
 혹은 `python app.py` 명령어를 사용할 수 있다.
 3. 포트포워딩을 한다(구글 검색시 많이 나와요!)
 4. ip:port 형식으로 접속가능!(ex. 0.0.0.0:5000 )
+
+### Screenshot
+
+<img src="https://github.com/NewPremium/SimpleWebShare/blob/main/images/screenshot.png?raw=true" width="500"></img>
